@@ -21,6 +21,14 @@ index.html # 模板站点引导文件
 README.MD # 说明文档
 ```
 # 整站修正工作
+## 情景零：中文URL乱码问题
+``` bash
+# getsite.sh加入参数
+--restrict-file-names=OS
+# wget: --restrict-file-names: Invalid restriction ‘OS’,
+#     use [unix|vms|windows],[lowercase|uppercase],[nocontrol],[ascii].
+```
+
 ## 情景一：非.html后缀问题
 抓取静态页面URL存在.aspx等后缀文件，如何转为html静态页面浏览?
 
@@ -35,10 +43,31 @@ add_header Content-Type 'text/html; charset=utf-8';
 文件夹中实际路径为 xxx/ask_end.aspx\?cid=28
 
 ```
+## 情景三：资源从/根目录获取导致404错误
+html根目录地址
+```
+# html中,/会导致URL从根目录获取
+src="/Scripts/underscore.js"
+# 修改为如下路径
+src="/newmbone.wezhan.cn/Scripts/underscore.js"
+# 批量替换脚本
+sed -i "s/=\"\//=\"\/newmbone.wezhan.cn\//g" `grep -rl "=\"\/"`
+```
 # ?符号在Unicode编码中为&#63;
 # 替换掉href中的URL地址即可
 sed -i "s/aspx\?/aspx\&\#63\;/g" `grep -rl "aspx\?"`
 
+```
+## 情景四：Render统一管理的css无法正常加载
+
+css后根目录地址
+```
+# 下载html中RenderCss文件，
+RunTime/RenderRunTimeCss?cid=content%2Fsitefiles5%2F5552%2Fcss%2Fpc%2F42451_zh-CN.css%3Fdt%3D635751159446896412
+# 替换RunTime目录文件为真实名称
+mv RunTime/RenderRunTimeCss?cid=content%2Fsitefiles5%2F5552%2Fcss%2Fpc%2F42451_zh-CN.css%3Fdt%3D635751159446896412 1265_zh-CN.css
+# 批量替换脚本（正则匹配多种Render随机路径，替换为正确文件）
+sed -i "s/RenderRunTimeCss.*[0-9]\ /1265_zh-CN.css/g" `grep -rl 'RenderRunTimeCss.*[0-9]\ '`
 ```
 
 # Nginx环境配置

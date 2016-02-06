@@ -5,4 +5,4 @@ then
 	exit                     ##不存在退出
 fi
 targetSite=$1
-wget -r -p -np -k -e robots=off ${targetSite}
+wget -r -p -np -k -e robots=off --restrict-file-names=unix ${targetSite}
