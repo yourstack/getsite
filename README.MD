@@ -1,4 +1,4 @@
-# 安纳斯|整站前端模板抓取脚本 v0.8
+# 未来全栈|整站前端模板抓取脚本 v0.8
 本项目为shell实现的整站模板抓取工具，便于前端模板资源的收集与学习。
 # 使用方法
 - 操作系统 linux, suggest Debian 64bit
@@ -93,11 +93,11 @@ server {
 
 # Contributor
 
-- CIO [ryanemax](https://ryanamax.github.io/), The Author.
+- CSO [ryanemax](https://www.futurestack.cn/), The Author.
 
 # Copyright
 
-http://www.anasit.com
+http://www.futurestack.cn
 
-Copyright © 2015 ANAS IT Inc. All Rights Reserved
+Copyright © 2015 FutureStack Inc. All Rights Reserved
 
